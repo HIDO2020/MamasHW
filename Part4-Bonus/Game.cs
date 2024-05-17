@@ -46,22 +46,17 @@ class Game : Board{
 
         Points += added_points;
 
-        // if(status == GameStatus.Full && added_points == 0)
-        //     status = GameStatus.Lose;
-        // else
         status = check_status(b);
-
     }
 
     public GameStatus check_status(Board b){
         Board copy = new Board(); //make deep copy of b
         int[, ] cell_list = new int [4, 4];
 
-        //copy.setData(cell_list);
         bool check_move = true;
         int count = 0;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++) //     got through board
         {
             for (int j = 0; j < 4; j++)
             {
@@ -70,10 +65,10 @@ class Game : Board{
                     return status;
                 }
 
-                if(b.getData()[i, j] != 0)
+                if(b.getData()[i, j] != 0) //     to check if the board is full
                     count++;
                 
-                cell_list[i, j] = b.getData()[i, j];
+                cell_list[i, j] = b.getData()[i, j]; //     deep copy for further checks
             }
         }
         copy.setData(cell_list);
@@ -94,7 +89,7 @@ class Game : Board{
         List<Direction> directions = new List<Direction>(){Direction.Down, Direction.Up
             ,Direction.Left ,Direction.Right};
 
-        foreach(Direction dir in directions){
+        foreach(Direction dir in directions){ //     checks every direction to make sure there are still possible moves when board is full
             points += copy1.Move(dir);
         }
         
