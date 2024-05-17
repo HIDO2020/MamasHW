@@ -68,18 +68,18 @@ class Board{
         int sum = 0;
         switch(Direct){
             case Direction.Left:
-                for(int col = 1; col < 4; col++){
+                for(int col = 1; col < 4; col++){ //     going through all cells except those which are already left
 
                     for(int row = 0; row< 4; row++){
 
                         if(Data[row, col] == 0)
                             continue;
                         
-                        for(int i = col - 1; i >= 0; i--){
+                        for(int i = col - 1; i >= 0; i--){ //     when found a cell that's not empty we start moving it in the direction
 
-                            if(Data[row, i] != 0){
+                            if(Data[row, i] != 0){ //     if when moving our current cell we encountered a non empty cell...
 
-                                if(Data[row, i] == Data[row,col]){
+                                if(Data[row, i] == Data[row,col]){ //     if current cell and the one which is in our way equal, we merge
 
                                     Data[row, i] *= 2;
                                     Data[row,col] = 0;
@@ -87,7 +87,7 @@ class Board{
                                     continue;
                                 }
 
-                                if(i + 1 != col && Data[row, col] != 0){
+                                if(i + 1 != col && Data[row, col] != 0){ //     if current cell does not equal the non empty cell, we stop right before the taken    
 
                                     Data[row, i + 1] = Data[row, col];
                                     Data[row, col] = 0;
@@ -95,7 +95,7 @@ class Board{
                                 }
                                 break;
                             }
-                            else if(i == 0 && Data[row, i] == 0){
+                            else if(i == 0 && Data[row, i] == 0){ // if we reached the wall at the end, we stop there
 
                                 Data[row, i] = Data[row, col];
                                 Data[row, col] = 0;
@@ -218,7 +218,7 @@ class Board{
                 break;
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++) //     checks if the move made any difference on board, if not, we do nothing 
         {
             for (int j = 0; j < 4; j++)
             {
@@ -230,32 +230,4 @@ class Board{
         }
         return no_change; //   signals that no change has happend
     }
-
-    // public void Print2DArray()
-    // {
-    //     for (int i = 0; i < 4; i++)
-    //     {
-    //         for (int j = 0; j < 4; j++)
-    //         {
-    //             Console.Write(Data[i,j] + "\t");
-    //         }
-    //         Console.WriteLine();
-    //     }
-    // }
-
-
-    // static void Main(string[] args)
-    // {
-    //     Board b = new Board();
-    //     int[,] nums = { {8,16,8,2},
-    //                     {64,4,16,8},
-    //                     {2,8,2,4},
-    //                     {2,4,2,0}, };
-    //     b.setData(nums);
-    //     b.Move(Direction.Left);
-
-    //     b.Print2DArray();
-    //     // Game g = new Game();
-    //     // g.se
-    // }
 }
